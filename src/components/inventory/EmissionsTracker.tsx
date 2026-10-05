@@ -1,10 +1,10 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useEmissions } from '../../hooks/useEmissions';
-import { EmissionSource } from '../../types/emissions';
+import type { EmissionSource } from '../../types/emissions';
 
 export const EmissionsTracker: React.FC = () => {
   const { emissions, loading, error, isSubmitting, fetchEmissions, addEmission } = useEmissions();
-  
+
   const [name, setName] = useState('');
   const [category, setCategory] = useState<EmissionSource>('Transporte');
   const [co2Amount, setCo2Amount] = useState<number | ''>('');
@@ -20,7 +20,7 @@ export const EmissionsTracker: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || co2Amount === '') return;
-    
+
     const success = await addEmission({
       name,
       category,
@@ -56,20 +56,20 @@ export const EmissionsTracker: React.FC = () => {
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
               Fuente
             </label>
-            <input 
+            <input
               required
-              type="text" 
+              type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" 
-              placeholder="Ej. Autos de empresa" 
+              className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              placeholder="Ej. Autos de empresa"
             />
           </div>
           <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
               Categoría
             </label>
-            <select 
+            <select
               value={category}
               onChange={(e) => setCategory(e.target.value as EmissionSource)}
               className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -83,20 +83,20 @@ export const EmissionsTracker: React.FC = () => {
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
               CO2 (kg)
             </label>
-            <input 
+            <input
               required
-              type="number" 
+              type="number"
               step="0.01"
               value={co2Amount}
               onChange={(e) => setCo2Amount(Number(e.target.value))}
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
+              className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             />
           </div>
         </div>
         <div className="flex items-center justify-end mt-4">
-          <button 
+          <button
             disabled={isSubmitting}
-            type="submit" 
+            type="submit"
             className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline disabled:opacity-50 transition-colors duration-200"
           >
             {isSubmitting ? 'Guardando...' : 'Agregar'}
