@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { EmissionItem, NewEmissionPayload } from '../types/emissions';
+import type { EmissionItem, NewEmissionPayload } from '../types/emissions';
 
 const MOCK_DATA: EmissionItem[] = [
   { id: '1', name: 'Flota vehicular', category: 'Transporte', co2_amount: 150.5, created_at: new Date().toISOString() },
